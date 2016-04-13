@@ -1,6 +1,5 @@
 require 'sinatra/base'
 
-
 class BlackjackWeb < Sinatra::Base
   set :views, proc { File.join(root, '..', 'views')}
 
