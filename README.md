@@ -15,6 +15,10 @@ This project began life as a pairing test I was practicing, the original develop
 2. `cd vingt-et-un`
 3. `bundle install`
 
+## Running Locally
+1. `rackup`
+2. Navigate in your browser to localhost
+
 ## Tests
 
-4. `rspec`
+1. `rspec`
