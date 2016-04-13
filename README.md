@@ -1,4 +1,6 @@
 [![Build Status](https://travis-ci.org/Teeohbee/vingt-et-un.svg?branch=master)](https://travis-ci.org/Teeohbee/vingt-et-un)
+[![Code Climate](https://codeclimate.com/github/Teeohbee/vingt-et-un/badges/gpa.svg)](https://codeclimate.com/github/Teeohbee/vingt-et-un)
+[![Test Coverage](https://codeclimate.com/github/Teeohbee/vingt-et-un/badges/coverage.svg)](https://codeclimate.com/github/Teeohbee/vingt-et-un/coverage)
 # vingt-et-un
 
 A basic game of Blackjack or Twenty One, written in Ruby and served up with a little help from Sinatra
