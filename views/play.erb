@@ -9,3 +9,7 @@
 <% @game.player_two.hand.each_with_index do |card, index| %>
 <p class="card<%= index %>"><%= card.rank %> <%= card.suit %></p>
 <% end %>
+
+<form method="Post" action="/hit">
+  <input type="submit" value="Hit">
+</form>

@@ -27,6 +27,12 @@ class BlackjackWeb < Sinatra::Base
     erb :play
   end
 
+  post '/hit' do
+    @game = Game.instance
+    @game.player_one.hit(@game.deck)
+    redirect '/play'
+  end
+
   # start the server if ruby file executed directly
   run! if app_file == $0
 end
