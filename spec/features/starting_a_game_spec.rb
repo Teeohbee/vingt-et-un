@@ -12,6 +12,7 @@ feature "Starting a new game" do
     click_button "New Game"
     fill_in('playername', :with => 'Toby')
     click_button "Submit"
+    expect(current_path).to eq "/game"
     expect(page).to have_content "Welcome Toby"
   end
 end
