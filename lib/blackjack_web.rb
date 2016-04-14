@@ -15,16 +15,16 @@ class BlackjackWeb < Sinatra::Base
   end
 
   post '/gamesetup' do
-    session[:playername] = params[:playername]
-    redirect '/gamesetup' if session[:playername] == ""
-    redirect '/game'
+    redirect '/gamesetup' if params[:playername] == ""
+    player_one = Player.new(params[:playername])
+    player_two = Player.new("Dealer")
+    @game = Game.create(player_one, player_two)
+    redirect '/play'
   end
 
-  get '/game' do
-    @player_one = Player.new(session[:playername])
-    @player_two = Player.new("Dealer")
-    session[:game] = Game.new(@player_one, @player_two)
-    erb :game
+  get '/play' do
+    @game = Game.instance
+    erb :play
   end
 
   # start the server if ruby file executed directly

@@ -1,0 +1,7 @@
+<p>Welcome <%= @game.player_one.name %></p>
+
+<%= @game.player_one.name %>
+<% @game.player_one.hand.each do |card| %>
+<%= card.rank %>
+<%= card.suit %>
+<% end %>
