@@ -11,6 +11,22 @@ describe Game do
     end
   end
 
+  describe "class methods" do
+    it "can create an instance of the game" do
+      toby = Player.new("Toby")
+      dealer = Player.new("Dealer")
+      game = Game.create(toby, dealer)
+      expect(game).to be_instance_of(Game)
+    end
+
+    it "can returns that instance of the game" do
+      toby = Player.new("Toby")
+      dealer = Player.new("Dealer")
+      @game = Game.create(toby, dealer)
+      expect(Game.instance).to equal(@game)
+    end
+  end
+
   describe "blackjack?" do
     it "confirms a blackjack win scenario" do
       player = double :player

@@ -1,0 +1,7 @@
+<p>Welcome <%= session[:playername] %></p>
+
+<%= @player_one.name %>
+<% @player_one.hand.each do |card| %>
+<%= card.rank %>
+<%= card.suit %>
+<% end %>

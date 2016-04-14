@@ -17,6 +17,14 @@ class Game
     end
   end
 
+  def self.create(player_1, player_2)
+    @game = Game.new(player_1, player_2)
+  end
+
+  def self.instance
+    @game
+  end
+
   def has_a_winner?
     if blackjack?(@player_one) || blackjack?(@player_two)
       "blackjack"

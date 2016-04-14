@@ -15,4 +15,13 @@ feature "Starting a new game" do
     expect(current_path).to eq "/game"
     expect(page).to have_content "Welcome Toby"
   end
+
+  scenario "If I don't enter a name, the page reloads" do
+    visit "/"
+    click_button "New Game"
+    fill_in('playername', :with => '')
+    click_button "Submit"
+    expect(current_path).to eq "/gamesetup"
+    expect(page).to have_content "Please enter your name"
+  end
 end
