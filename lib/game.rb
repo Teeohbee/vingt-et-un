@@ -16,6 +16,7 @@ class Game
       @dealer.hit(@deck)
     end
     @current_player = @player_one
+    @game_over = false
   end
 
   def self.create(player_1)
@@ -31,9 +32,8 @@ class Game
   end
 
   def hit
-    @current_player.hit
+    @current_player.hit(@deck)
   end
-
 
   def blackjack?(player)
     player.calculate_score == 21
@@ -41,6 +41,14 @@ class Game
 
   def bust?(player)
     player.calculate_score > 21
+  end
+
+  def dealer_play
+    if @dealer.calculate_score < 17
+      hit
+    else
+      @game_over = true
+    end
   end
 
 end

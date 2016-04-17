@@ -28,7 +28,19 @@ class BlackjackWeb < Sinatra::Base
 
   post '/hit' do
     @game = Game.instance
-    @game.player_one.hit(@game.deck)
+    @game.hit
+    redirect '/play'
+  end
+
+  post '/stick' do
+    @game = Game.instance
+    @game.stick
+    redirect '/play'
+  end
+
+  post '/dealer_play' do
+    @game = Game.instance
+    @game.dealer_play
     redirect '/play'
   end
 

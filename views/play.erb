@@ -2,14 +2,30 @@
 
 <h2><%= @game.player_one.name %></h2>
 <% @game.player_one.hand.each_with_index do |card, index| %>
-<p class="card<%= index %>"><%= card.rank %> <%= card.suit %></p>
+<p class="playercard<%= index %>"><%= card.rank %> <%= card.suit %></p>
 <% end %>
 
 <h2><%= @game.dealer.name %></h2>
-<% @game.dealer.hand.each_with_index do |card, index| %>
-<p class="card<%= index %>"><%= card.rank %> <%= card.suit %></p>
+<% if @game.current_player.name == "Dealer" %>
+  <% @game.dealer.hand.each_with_index do |card, index| %>
+  <p class="dealercard<%= index %>"><%= card.rank %> <%= card.suit %></p>
+  <% end %>
+<% else %>
+  <p class="dealercard0"><%= @game.dealer.hand[0].rank %> <%= @game.dealer.hand[0].suit %></p>
 <% end %>
 
+<p>Current player - <%= @game.current_player.name %></p>
+
+<% if @game.current_player.name == "Dealer" %>
+<form method="Post" action="/dealer_play">
+  <input type="submit" value="Dealer's turn">
+</form>
+<% elsif @game.bust?(@game.current_player) == false %>
 <form method="Post" action="/hit">
   <input type="submit" value="Hit">
 </form>
+
+<form method="Post" action="/stick">
+  <input type="submit" value="Stick">
+</form>
+<% end %>
