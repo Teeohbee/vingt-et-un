@@ -3,7 +3,7 @@ feature "Playing a new game" do
     visit "/"
     click_button "New Game"
     fill_in('playername', :with => 'Toby')
-    click_button "Submit"
+    click_button "Play"
     click_button "Hit"
     expect(page).to have_css "p.card2"
   end

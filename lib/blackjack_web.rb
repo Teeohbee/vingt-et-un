@@ -17,8 +17,7 @@ class BlackjackWeb < Sinatra::Base
   post '/gamesetup' do
     redirect '/gamesetup' if params[:playername] == ""
     player_one = Player.new(params[:playername])
-    player_two = Player.new("Dealer")
-    @game = Game.create(player_one, player_two)
+    @game = Game.create(player_one)
     redirect '/play'
   end
 

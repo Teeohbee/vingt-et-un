@@ -5,8 +5,8 @@
 <p class="card<%= index %>"><%= card.rank %> <%= card.suit %></p>
 <% end %>
 
-<h2><%= @game.player_two.name %></h2>
-<% @game.player_two.hand.each_with_index do |card, index| %>
+<h2><%= @game.dealer.name %></h2>
+<% @game.dealer.hand.each_with_index do |card, index| %>
 <p class="card<%= index %>"><%= card.rank %> <%= card.suit %></p>
 <% end %>
 
