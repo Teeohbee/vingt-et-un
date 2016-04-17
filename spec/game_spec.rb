@@ -73,6 +73,28 @@ describe Game do
       game = Game.new(player, losing_player)
       expect(game.has_a_winner?).to eql "bust"
     end
+
+    it "confirms a win scenario when player has a higher score than the dealer at game end" do
+      player = double :player
+      dealer = double :player
+      allow(player).to receive(:hit)
+      allow(dealer).to receive(:hit)
+      allow(player).to receive(:calculate_score) { 19 }
+      allow(dealer).to receive(:calculate_score) { 17 }
+      game = Game.new(player, dealer)
+      expect(game.has_a_winner?).to eql "score"
+    end
+
+    it "does not confirm a win scenario while dealer has score less than 17" do
+      player = double :player
+      dealer = double :player
+      allow(player).to receive(:hit)
+      allow(dealer).to receive(:hit)
+      allow(player).to receive(:calculate_score) { 19 }
+      allow(dealer).to receive(:calculate_score) { 13 }
+      game = Game.new(player, dealer)
+      expect(game.has_a_winner?).to eql nil
+    end
   end
 
 end

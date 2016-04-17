@@ -1,11 +1,11 @@
 <p>Welcome <%= @game.player_one.name %></p>
 
-<p><%= @game.player_one.name %></p>
+<h2><%= @game.player_one.name %></h2>
 <% @game.player_one.hand.each_with_index do |card, index| %>
 <p class="card<%= index %>"><%= card.rank %> <%= card.suit %></p>
 <% end %>
 
-<p><%= @game.player_two.name %></p>
+<h2><%= @game.player_two.name %></h2>
 <% @game.player_two.hand.each_with_index do |card, index| %>
 <p class="card<%= index %>"><%= card.rank %> <%= card.suit %></p>
 <% end %>

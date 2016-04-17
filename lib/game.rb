@@ -30,6 +30,8 @@ class Game
       "blackjack"
     elsif bust?(@player_one) || bust?(@player_two)
       "bust"
+    elsif @player_two.calculate_score > 16
+      "score"
     end
   end
 
