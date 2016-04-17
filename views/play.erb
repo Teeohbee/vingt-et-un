@@ -1,7 +1,9 @@
 <p>Welcome <%= @game.player_one.name %></p>
 
-Is the game over?
-<%= @game.game_over? %>
+<% if @game.game_over? %>
+<p><%= @game.winner.name %> wins!</p>
+<% end %>
+
 
 <h2><%= @game.player_one.name %></h2>
 <% @game.player_one.hand.each_with_index do |card, index| %>
@@ -9,7 +11,7 @@ Is the game over?
 <% end %>
 
 <h2><%= @game.dealer.name %></h2>
-<% if @game.current_player.name == "Dealer" %>
+<% if @game.current_player.name == "Dealer" || @game.game_over? %>
   <% @game.dealer.hand.each_with_index do |card, index| %>
   <p class="dealercard<%= index %>"><%= card.rank %> <%= card.suit %></p>
   <% end %>
@@ -19,6 +21,7 @@ Is the game over?
 
 <p>Current player - <%= @game.current_player.name %></p>
 
+<% if @game.game_over? == false %>
 <% if @game.current_player.name == "Dealer" %>
 <form method="Post" action="/dealer_play">
   <input type="submit" value="Dealer's turn">
@@ -31,3 +34,8 @@ Is the game over?
   <input type="submit" value="Stick">
 </form>
 <% end %>
+<% end %>
+
+<form method="Post" action="/new_game">
+  <input type="submit" value="New Game">
+</form>

@@ -44,6 +44,13 @@ class BlackjackWeb < Sinatra::Base
     redirect '/play'
   end
 
+  post '/new_game' do
+    @game = Game.instance
+    player_one = Player.new(@game.player_one.name)
+    @game = Game.create(player_one)
+    redirect '/play'
+  end
+
   # start the server if ruby file executed directly
   run! if app_file == $0
 end

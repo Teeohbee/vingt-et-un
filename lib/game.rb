@@ -29,6 +29,9 @@ class Game
 
   def stick
     @current_player = @dealer
+    if @dealer.calculate_score >= 17
+      @game_over = true
+    end
   end
 
   def hit
@@ -72,6 +75,9 @@ class Game
   def dealer_play
     if @dealer.calculate_score < 17
       hit
+      if @dealer.calculate_score >= 17
+        @game_over = true
+      end
     else
       @game_over = true
     end
