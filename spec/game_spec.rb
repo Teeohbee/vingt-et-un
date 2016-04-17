@@ -44,49 +44,50 @@ describe Game do
     end
   end
 
-  # describe "blackjack or bust?" do
-  #   it "confirms a win scenario when a player receives a blackjack" do
-  #     player = double :player
-  #     dealer = double :player
-  #     allow(player).to receive(:hit)
-  #     allow(dealer).to receive(:hit)
-  #     allow(player).to receive(:calculate_score) { 21 }
-  #     game = Game.new(player, dealer)
-  #     expect(game.has_a_winner?).to eql "blackjack"
-  #   end
-  #
-  #   it "confirms a win scenario when a loser receives a bust" do
-  #     player = double :player
-  #     dealer = double :player
-  #     allow(player).to receive(:hit)
-  #     allow(dealer).to receive(:hit)
-  #     allow(player).to receive(:calculate_score) { 22 }
-  #     game = Game.new(player, dealer)
-  #     expect(game.has_a_winner?).to eql "bust"
-  #   end
-  #
-  #   xit "confirms a win scenario when player has a higher score than the dealer at game end" do
-  #     player = double :player
-  #     dealer = double :player
-  #     allow(player).to receive(:hit)
-  #     allow(dealer).to receive(:hit)
-  #     allow(player).to receive(:calculate_score) { 19 }
-  #     allow(dealer).to receive(:calculate_score) { 17 }
-  #     game = Game.new(player, dealer)
-  #     expect(game.has_a_winner?).to eql "score"
-  #   end
-  #
-  #   xit "does not confirm a win scenario while dealer has score less than 17" do
-  #     player = double :player
-  #     dealer = double :player
-  #     allow(player).to receive(:hit)
-  #     allow(dealer).to receive(:hit)
-  #     allow(player).to receive(:calculate_score) { 19 }
-  #     allow(dealer).to receive(:calculate_score) { 13 }
-  #     game = Game.new(player, dealer)
-  #     expect(game.has_a_winner?).to eql nil
-  #   end
-  # end
+  describe "game_over?" do
+    it "confirms game is over when a player receives a blackjack" do
+      player = double :player
+      allow(player).to receive(:hit)
+      allow(player).to receive(:calculate_score) { 21 }
+      game = Game.new(player)
+      expect(game.game_over?).to eql true
+    end
+
+    it "confirms game is over when a player receives goes bust" do
+      player = double :player
+      allow(player).to receive(:hit)
+      allow(player).to receive(:calculate_score) { 24 }
+      game = Game.new(player)
+      expect(game.game_over?).to eql true
+    end
+  end
+
+  describe "winner" do
+    it "returns the player who won the game from a blackjack" do
+      player = double :player
+      allow(player).to receive(:hit)
+      allow(player).to receive(:calculate_score) { 21 }
+      game = Game.new(player)
+      expect(game.winner).to eql player
+    end
+
+    it "returns the player who won the game from a bust" do
+      player = double :player
+      allow(player).to receive(:hit)
+      allow(player).to receive(:calculate_score) { 23 }
+      game = Game.new(player)
+      expect(game.winner.name).to eql "Dealer"
+    end
+
+    xit "returns the player who won the game from a higher score" do
+      player = double :player
+      allow(player).to receive(:hit)
+      allow(player).to receive(:calculate_score) { 20 }
+      game = Game.new(player)
+      3.times { game.dealer_play }
+      expect(game.winner).to eql player
+    end
+  end
 
   describe "current player" do
     it "starts off pointing to player one" do

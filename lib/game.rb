@@ -43,6 +43,32 @@ class Game
     player.calculate_score > 21
   end
 
+  def game_over?
+    if @game_over == true
+      true
+    elsif blackjack?(@current_player)
+      @game_over = true
+    elsif bust?(@current_player)
+      @game_over = true
+    else
+      false
+    end
+  end
+
+  def winner
+    if game_over?
+      if blackjack?(@player_one) || bust?(@dealer)
+        @player_one
+      elsif blackjack?(@dealer) || bust?(@player_one)
+        @dealer
+      elsif @player_one.calculate_score > @dealer.calculate_score
+        @player_one
+      else
+        @dealer
+      end
+    end
+  end
+
   def dealer_play
     if @dealer.calculate_score < 17
       hit

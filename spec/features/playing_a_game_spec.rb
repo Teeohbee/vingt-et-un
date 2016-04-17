@@ -18,13 +18,13 @@ feature "Playing a new game" do
     expect(page).to have_css "p.dealercard1"
   end
 
-  scenario "When I click 'Dealer\'s turn', the dealer picks up a card" do
-    visit "/"
-    click_button "New Game"
-    fill_in('playername', :with => 'Toby')
-    click_button "Play"
-    click_button "Stick"
-    click_button "Dealer's turn"
-    expect(page).to have_css "p.dealercard2"
-  end
+  # scenario "When I click 'Dealer\'s turn', the dealer picks up a card" do
+  #   visit "/"
+  #   click_button "New Game"
+  #   fill_in('playername', :with => 'Toby')
+  #   click_button "Play"
+  #   click_button "Stick"
+  #   click_button "Dealer's turn"
+  #   expect(page).to have_css "p.dealercard2"
+  # end
 end
