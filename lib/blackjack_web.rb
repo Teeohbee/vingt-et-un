@@ -44,7 +44,7 @@ class BlackjackWeb < Sinatra::Base
     redirect '/play'
   end
 
-  post '/new_game' do
+  get '/new_game' do
     @game = Game.instance
     player_one = Player.new(@game.player_one.name)
     @game = Game.create(player_one)

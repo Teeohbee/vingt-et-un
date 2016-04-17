@@ -1,7 +1,7 @@
 feature "Playing a new game" do
   scenario "When I click 'hit', I pick up an extra card" do
     visit "/"
-    click_button "New Game"
+    click_link "New Game"
     fill_in('playername', :with => 'Toby')
     click_button "Play"
     click_button "Hit"
@@ -10,7 +10,7 @@ feature "Playing a new game" do
 
   scenario "When I click 'stick', the current player changes to dealer" do
     visit "/"
-    click_button "New Game"
+    click_link "New Game"
     fill_in('playername', :with => 'Toby')
     click_button "Play"
     click_button "Stick"

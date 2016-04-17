@@ -2,10 +2,34 @@
 <html>
 <head>
   <title>Vingt et Un</title>
+  <link rel="stylesheet" type="text/css" href="semantic.css">
+  <link rel="stylesheet" type="text/css" href="main.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
+  <script src="semantic.js"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
+
+
+
 </head>
 <body>
 
-<h1>Welcome to Vingt et Un!</h1>
+  <div class="ui red inverted menu">
+    <a class="item active">
+      Ving et Un
+    </a>
+    <div class="right menu">
+      <% if @game %>
+        <div class="item">Welcome <%= @game.player_one.name %></div>
+        <a class="item" href="/new_game">
+          <div class="ui button">Start a New Game</div>
+        </a>
+        <% else %>
+        <a class="item" href="/gamesetup">
+          <div class="ui button">New Game</div>
+        </a>
+      <% end %>
+    </div>
+  </div>
 
 <%= yield %>
 
