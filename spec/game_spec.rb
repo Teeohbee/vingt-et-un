@@ -79,12 +79,13 @@ describe Game do
       expect(game.winner.name).to eql "Dealer"
     end
 
-    xit "returns the player who won the game from a higher score" do
+    it "returns the player who won the game from a higher score" do
       player = double :player
       allow(player).to receive(:hit)
       allow(player).to receive(:calculate_score) { 20 }
       game = Game.new(player)
-      3.times { game.dealer_play }
+      allow(game.dealer).to receive(:calculate_score) { 17 }
+      game.dealer_play
       expect(game.winner).to eql player
     end
   end
@@ -113,6 +114,25 @@ describe Game do
         game = Game.new(player)
         expect(player).to receive(:hit)
         game.hit
+      end
+  end
+
+  describe "dealer play" do
+      it "calls 'hit' on dealer if score is under 17" do
+        player = double :player
+        allow(player).to receive(:hit)
+        game = Game.new(player)
+        allow(game.dealer).to receive(:calculate_score) { 16 }
+        expect(game.current_player).to receive(:hit)
+        game.dealer_play
+      end
+
+      it "calls 'hit' on dealer if score is under 17" do
+        player = double :player
+        allow(player).to receive(:hit)
+        game = Game.new(player)
+        allow(game.dealer).to receive(:calculate_score) { 18 }
+        expect(game.dealer_play).to eql true
       end
   end
 
