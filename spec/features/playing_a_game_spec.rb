@@ -14,7 +14,7 @@ feature "Playing a new game" do
     fill_in('playername', :with => 'Toby')
     click_button "Play"
     click_button "Stick"
-    expect(page).to have_content "Current player - Dealer"
+    expect(page).to have_content "It's the Dealer's turn"
     expect(page).to have_css "p.dealercard1"
   end
 

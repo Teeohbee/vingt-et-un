@@ -1,5 +1,9 @@
 <% if @game.game_over? %>
-<p><%= @game.winner.name %> wins!</p>
+  <% if @game.winner.name == "Dealer" %>
+    <div class="ui massive red message">Oh no, you lost! <%= @game.winner.name %> wins!</div>
+  <% else %>
+    <div class="ui massive green message">Way to go! <%= @game.winner.name %> wins!</div>
+  <% end %>
 <% end %>
 
 <div class="ui two column grid">
@@ -8,6 +12,13 @@
     <h2><%= @game.player_one.name %></h2>
     <% @game.player_one.hand.each_with_index do |card, index| %>
     <p class="playercard<%= index %>"><%= card.rank %> <%= card.suit %></p>
+    <% end %>
+    <% if @game.bust?(@game.player_one) %>
+      <div class="ui large compact red message">Bust!</div>
+    <% elsif @game.blackjack?(@game.player_one) %>
+      <div class="ui large compact green message">Blackjack!</div>
+    <% else %>
+      <div class="ui large compact message"><%= @game.player_one.calculate_score %></div>
     <% end %>
 
   </div>
@@ -18,20 +29,48 @@
       <% @game.dealer.hand.each_with_index do |card, index| %>
       <p class="dealercard<%= index %>"><%= card.rank %> <%= card.suit %></p>
       <% end %>
+      <% if @game.bust?(@game.dealer) %>
+        <div class="ui large compact red message">Bust!</div>
+      <% elsif @game.blackjack?(@game.dealer) %>
+        <div class="ui large compact green message">Blackjack!</div>
+      <% else %>
+        <div class="ui large compact message"><%= @game.dealer.calculate_score %></div>
+      <% end %>
     <% else %>
       <p class="dealercard0"><%= @game.dealer.hand[0].rank %> <%= @game.dealer.hand[0].suit %></p>
+      <div class="ui large compact message"><%= @game.dealer.hand[0].value %></div>
     <% end %>
+
 
   </div>
 
 <div class="twelve wide column centered">
-<p>Current player - <%= @game.current_player.name %></p>
+<% if @game.game_over? %>
+  <div class="ui huge compact message">Oof, that was intense! Fancy starting a
+    <a class="item" href="/new_game">
+      <div class="ui button">New Game</div>
+    </a>
+    ?
+  </div>
+<% else %>
+  <% if @game.current_player.name == "Dealer" %>
+    <div class="ui huge compact message">It's the Dealer's turn, do you want to watch them play?</div>
+  <% else %>
+    <div class="ui huge compact message">You're up <%= @game.current_player.name %>! Whatcha gonna do?</div>
+  <% end %>
+<% end %>
 
 <% if @game.game_over? == false %>
 <% if @game.current_player.name == "Dealer" %>
-<form method="Post" action="/dealer_play">
-  <input type="submit" value="Dealer's turn">
-</form>
+<div class="ui buttons primary center">
+    <form method="Post" action="/dealer_play">
+      <input class="ui positive button fluid massive" type="submit" value="Card by Card">
+    </form>
+  <div class="or massive"></div>
+    <form method="Post" action="/stick">
+      <input class="ui positive button fluid massive" type="submit" value="Skip to Results">
+    </form>
+</div>
 <% elsif @game.bust?(@game.current_player) == false %>
 <div class="ui buttons primary center">
     <form method="Post" action="/hit">
