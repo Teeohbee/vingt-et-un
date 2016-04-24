@@ -11,3 +11,7 @@ div {
 form {
   width: 100%;
 }
+
+.ui.container {
+  text-align: left;
+}
