@@ -17,30 +17,29 @@ class BlackjackWeb < Sinatra::Base
   post '/gamesetup' do
     redirect '/gamesetup' if params[:playername] == ""
     player_one = Player.new(params[:playername])
-    session[:game] = Game.create(player_one)
-    @game = session[:game]
+    @game = Game.create(player_one)
     redirect '/play'
   end
 
   get '/play' do
-    @game = session[:game].instance
+    @game = Game.instance
     erb :play
   end
 
   post '/hit' do
-    @game = session[:game].instance
+    @game = Game.instance
     @game.hit
     redirect '/play'
   end
 
   post '/stick' do
-    @game = session[:game].instance
+    @game = Game.instance
     @game.stick
     redirect '/play'
   end
 
   post '/dealer_play' do
-    @game = session[:game].instance
+    @game = Game.instance
     @game.dealer_play
     redirect '/play'
   end
@@ -48,7 +47,7 @@ class BlackjackWeb < Sinatra::Base
   post '/skip_to_results' do
     @game = Game.instance
     while @game.game_over? == false
-      @game.dealer_play      
+      @game.dealer_play
     end
     redirect '/play'
   end
