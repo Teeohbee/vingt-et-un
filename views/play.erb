@@ -64,11 +64,11 @@
 <% if @game.current_player.name == "Dealer" %>
 <div class="ui buttons primary center">
     <form method="Post" action="/dealer_play">
-      <input class="ui positive button fluid massive" type="submit" value="Card by Card">
+      <input class="ui positive button massive" type="submit" value="Card by Card">
     </form>
   <div class="or massive"></div>
-    <form method="Post" action="/stick">
-      <input class="ui positive button fluid massive" type="submit" value="Skip to Results">
+    <form method="Post" action="/skip_to_results">
+      <input class="ui button massive" type="submit" value="Skip to Results">
     </form>
 </div>
 <% elsif @game.bust?(@game.current_player) == false %>

@@ -44,6 +44,14 @@ class BlackjackWeb < Sinatra::Base
     redirect '/play'
   end
 
+  post '/skip_to_results' do
+    @game = Game.instance
+    while @game.game_over? == false
+      @game.dealer_play      
+    end
+    redirect '/play'
+  end
+
   get '/new_game' do
     @game = Game.instance
     player_one = Player.new(@game.player_one.name)
