@@ -62,23 +62,21 @@
 
 <% if @game.game_over? == false %>
 <% if @game.current_player.name == "Dealer" %>
-<div class="ui buttons primary center">
+<div class="ui buttons center">
     <form method="Post" action="/dealer_play">
-      <input class="ui positive button massive" type="submit" value="Card by Card">
+      <input class="ui orange button inverted massive" type="submit" value="Card by Card">
     </form>
-  <div class="or massive"></div>
     <form method="Post" action="/skip_to_results">
-      <input class="ui button massive" type="submit" value="Skip to Results">
+      <input class="ui button inverted purple massive" type="submit" value="Skip to Results">
     </form>
 </div>
 <% elsif @game.bust?(@game.current_player) == false %>
-<div class="ui buttons primary center">
+<div class="ui buttons center">
     <form method="Post" action="/hit">
-      <input class="ui button fluid massive" type="submit" value="Hit">
+      <input class="ui button blue inverted fluid massive" type="submit" value="Hit">
     </form>
-  <div class="or massive"></div>
     <form method="Post" action="/stick">
-      <input class="ui positive button fluid massive" type="submit" value="Stick">
+      <input class="ui green inverted button fluid massive" type="submit" value="Stick">
     </form>
 </div>
 </div>
